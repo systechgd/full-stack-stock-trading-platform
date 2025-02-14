@@ -1,8 +1,9 @@
-import React from 'react';
+import React from "react";
+import '../../public/CSS/NavBar.css'
 
 function NavBar() {
-    return ( 
-        <nav
+  return (
+    <nav
       class="navbar navbar-expand-lg border-bottom"
       style={{ backgroundColor: "#FFF" }}
     >
@@ -58,7 +59,7 @@ function NavBar() {
         </div>
       </div>
     </nav>
-     );
+  );
 }
 
 export default NavBar;
