@@ -1,6 +1,7 @@
 import React from "react";
 
-const Apps = () => {
+const Positions = () => {
+  return (
   <>
   <h3 className="title">Positions (2)</h3>
 
@@ -18,6 +19,6 @@ const Apps = () => {
     </table>
   </div>
 </>
-};
+)};
 
-export default Apps;
+export default Positions;
