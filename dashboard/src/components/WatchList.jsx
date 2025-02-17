@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Tooltip, Grow } from "@mui/material";
 import { watchlist } from "../data/data";
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import GeneralContext from "./GeneralContext";
 
 const WatchList = () => {
   return (
@@ -57,61 +58,67 @@ const WatchListItem = ({ stock }) => {
           <span className="price">{stock.price}</span>
         </div>
       </div>
-      {showWatchListActions && <WatchlistActions uid={stock.name}/>}
+      {showWatchListActions && <WatchlistActions uid={stock.name} />}
     </li>
   );
 };
 
-const WatchlistActions = ({uid}) => {
+const WatchlistActions = ({ uid }) => {
+  const generalContext = useContext(GeneralContext);
+
+  const handleBuyClick = () => {
+    generalContext.openBuyWindow(uid);
+  };
+
   return (
-    <span className="actions" >
-      <Tooltip 
-      title="Buy (B)" 
-      placement="top" 
-      arrow
-      slots={{
-        transition: Grow,
-      }}   
-      >
-        <button className="buy ">Buy</button>
-      </Tooltip>
-      <Tooltip 
-      title="Sell (S)" 
-      placement="top" 
-      arrow
-      slots={{
-        transition: Grow,
-      }}   
-      >
-        <button className="sell ">Sell</button>
-      </Tooltip>
-      <Tooltip 
-      title="Analytics (A)" 
-      placement="top" 
-      arrow
-      slots={{
-        transition: Grow,
-      }}   
-      >
-       <button className="action icon">
-        <BarChartOutlinedIcon className="icon"/>
-        </button>
-      </Tooltip>
-      <Tooltip 
-      title="More" 
-      placement="top" 
-      arrow
-      slots={{
-        transition: Grow,
-      }}   
-      >
-       <button className="action icon">
-        <MoreHorizIcon className="icon"/>
-        </button>
-      </Tooltip>
+    <span className="actions">
+      <span>
+        <Tooltip
+          title="Buy (B)"
+          placement="top"
+          arrow
+          slots={{
+            transition: Grow,
+          }}
+          onClick={handleBuyClick}
+        >
+          <button className="buy">Buy</button>
+        </Tooltip>
+        <Tooltip
+          title="Sell (S)"
+          placement="top"
+          arrow
+          slots={{
+            transition: Grow,
+          }}
+        >
+          <button className="sell ">Sell</button>
+        </Tooltip>
+        <Tooltip
+          title="Analytics (A)"
+          placement="top"
+          arrow
+          slots={{
+            transition: Grow,
+          }}
+        >
+          <button className="action icon">
+            <BarChartOutlinedIcon className="icon" />
+          </button>
+        </Tooltip>
+        <Tooltip
+          title="More"
+          placement="top"
+          arrow
+          slots={{
+            transition: Grow,
+          }}
+        >
+          <button className="action icon">
+            <MoreHorizIcon className="icon" />
+          </button>
+        </Tooltip>
+      </span>
     </span>
-
-  )
-
-
-}
+  );
+};
